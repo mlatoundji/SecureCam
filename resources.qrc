@@ -1,0 +1,7 @@
+<RCC>
+    <qresource prefix="/SecureCam">
+        <file>LoginPage.qml</file>
+        <file>HomePage.qml</file>
+        <file>main.qml</file>
+    </qresource>
+</RCC>
