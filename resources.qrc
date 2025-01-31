@@ -1,7 +1,11 @@
 <RCC>
     <qresource prefix="/SecureCam">
+        <file>DashboardPage.qml</file>
+        <file>DeviceDelegate.qml</file>
+        <file>DevicesPage.qml</file>
         <file>LoginPage.qml</file>
         <file>HomePage.qml</file>
         <file>main.qml</file>
+        <file>MenuButton.qml</file>
     </qresource>
 </RCC>

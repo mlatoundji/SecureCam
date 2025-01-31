@@ -24,6 +24,8 @@ Item {
             echoMode: TextInput.Password
             width: 200
         }
+        
+        //
 
         Button {
             text: qsTr("Se connecter")

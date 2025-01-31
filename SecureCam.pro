@@ -25,5 +25,9 @@ else: unix:!android: target.path = /opt/$${TARGET}/bin
 !isEmpty(target.path): INSTALLS += target
 
 DISTFILES += \
+    DashboardPage.qml \
+    DeviceDelegate.qml \
+    DevicesPage.qml \
     HomePage.qml \
-    LoginPage.qml
+    LoginPage.qml \
+    MenuButton.qml

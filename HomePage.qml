@@ -5,28 +5,45 @@ Item {
     id: homePage
     anchors.fill: parent
 
-    // Menu latéral (Drawer)
-    Drawer {
-        id: drawer
-        edge: Qt.LeftEdge
-        width: parent.width * 0.3
-        // Style épuré
-        contentItem: ListView {
-            anchors.fill: parent
-            model: ListModel {
-                ListElement { text: "Dashboard" }
-                ListElement { text: "Reports" }
-                ListElement { text: "Settings" }
-            }
-            delegate: ItemDelegate {
-                text: model.text
-                onClicked: {
-                    drawer.close()
-                    // Gérer la navigation interne si besoin
-                }
-            }
-        }
-    }
+    // Drawer latéral
+     Drawer {
+         id: drawer
+         // Tiroir qui s’ouvre depuis la gauche
+         edge: Qt.LeftEdge
+         width: parent.width * 0.3
+         height : parent.height
+
+         // Contenu du Drawer : ListView avec un modèle
+         contentItem: ListView {
+             anchors.fill: parent
+             // On définit un modèle statique pour l’exemple
+             model: ListModel {
+                 ListElement {
+                     text: "Dashboard"
+                     pageSource: "DashboardPage.qml" // Le fichier à charger
+                 }
+                 ListElement {
+                     text: "Devices"
+                     pageSource: "DevicesPage.qml"
+                 }
+                 ListElement {
+                     text: "Settings"
+                     pageSource: "SettingsPage.qml"
+                 }
+             }
+
+             delegate: ItemDelegate {
+                 text: model.text
+                 onClicked: {
+                     // Fermer le Drawer
+                     drawer.close()
+                     // Charger la nouvelle page dans le Loader
+                     // On suppose qu'on peut accéder à mainLoader via id:
+                     mainLoader.source = model.pageSource
+                 }
+             }
+         }
+     }
 
     // Bouton ou icône pour ouvrir le drawer
     Button {
@@ -34,35 +51,24 @@ Item {
         text: qsTr("Menu")
         anchors.left: parent.left
         anchors.top: parent.top
-        onClicked: drawer.open()
+        anchors.margins: 20
+        onClicked: {
+            console.log("Drawer opening...")
+            drawer.open()
+        }
     }
 
-    // Contenu principal (ex: un Label + un rectangle "design épuré")
-    Column {
-        id: mainContent
+    // Loader qui affichera la page courante
+    Loader {
+        id: mainLoader
+        anchors.top: menuButton.bottom
         anchors.left: menuButton.right
-        anchors.top: parent.top
         anchors.right: parent.right
         anchors.bottom: parent.bottom
-        spacing: 20
-        padding: 20
 
-        Text {
-            text: qsTr("Bienvenue dans l'application")
-            font.pixelSize: 24
-            color: "black"
-        }
-
-        Rectangle {
-            width: parent.width * 0.8
-            height: 200
-            color: "lightgray"
-            radius: 8
-            Text {
-                anchors.centerIn: parent
-                text: qsTr("Contenu principal... (graphique, stats, etc.)")
-                color: "#555"
-            }
-        }
+        // On peut définir une page par défaut
+        source: "DashboardPage.qml"
     }
+
+
 }

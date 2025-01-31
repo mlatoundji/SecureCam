@@ -13,7 +13,7 @@ ApplicationWindow {
         width: 800
         height: 600
 
-        property bool authenticated: false
+        property bool authenticated: true
 
         // Quand authenticated = false => on affiche la page de login
         // Quand authenticated = true  => on affiche la page d'accueil
